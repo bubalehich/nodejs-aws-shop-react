@@ -15,6 +15,26 @@ This is frontend starter project for nodejs-aws mentoring program. It uses the f
 - [Prettier](https://prettier.io/) as a code formatting tool
 - [TypeScript](https://www.typescriptlang.org/) as a type checking tool
 
+## Deployment
+
+### Links
+
+- **CloudFront URL**: _TODO: add after deploy_
+- **S3 Bucket URL** (returns 403 Access Denied — expected): _TODO: add after deploy_
+
+### How to deploy
+
+```bash
+npm install --legacy-peer-deps
+npm run deploy
+```
+
+### How to destroy all AWS resources
+
+```bash
+npm run destroy
+```
+
 ## Available Scripts
 
 ### `start`
