@@ -19,8 +19,8 @@ This is frontend starter project for nodejs-aws mentoring program. It uses the f
 
 ### Links
 
-- **CloudFront URL**: _TODO: add after deploy_
-- **S3 Bucket URL** (returns 403 Access Denied — expected): _TODO: add after deploy_
+- **CloudFront URL**: pending (AWS account verification in progress — support case opened)
+- **S3 Website URL** (temporary, public access): http://shopstack-shopbucket86a369b0-193zhuhlmfjm.s3-website-us-east-1.amazonaws.com
 
 ### How to deploy
 
