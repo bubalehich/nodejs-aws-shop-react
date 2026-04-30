@@ -19,8 +19,8 @@ This is frontend starter project for nodejs-aws mentoring program. It uses the f
 
 ### Links
 
-- **CloudFront URL**: https://d2bnst3c5pps09.cloudfront.net
-- **S3 Bucket URL** (returns 403 Access Denied — expected): https://cdkstack-sitebucket397a1860-bwulddlko682.s3.amazonaws.com
+- **CloudFront URL**: https://d196bueosbbyyl.cloudfront.net
+- **S3 Bucket URL** (returns 403 Access Denied — expected): https://cdkstack-sitebucket397a1860-rgunmlzwm3af.s3.amazonaws.com
 
 ### How to deploy
 
