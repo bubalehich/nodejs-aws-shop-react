@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -13,8 +14,7 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      const file = files[0];
-      setFile(file);
+      setFile(files[0]);
     }
   };
 
@@ -23,25 +23,23 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   };
 
   const uploadFile = async () => {
-    console.log("uploadFile to", url);
+    if (!file) return;
 
-    // Get the presigned URL
-    // const response = await axios({
-    //   method: "GET",
-    //   url,
-    //   params: {
-    //     name: encodeURIComponent(file.name),
-    //   },
-    // });
-    // console.log("File to upload: ", file.name);
-    // console.log("Uploading to: ", response.data);
-    // const result = await fetch(response.data, {
-    //   method: "PUT",
-    //   body: file,
-    // });
-    // console.log("Result: ", result);
-    // setFile("");
+    console.log("Requesting signed URL for", file.name);
+    const response = await axios.get<string>(url, {
+      params: { name: encodeURIComponent(file.name) },
+    });
+
+    console.log("Uploading to", response.data);
+    const result = await fetch(response.data, {
+      method: "PUT",
+      body: file,
+    });
+    console.log("Upload result:", result.status);
+
+    setFile(undefined);
   };
+
   return (
     <Box>
       <Typography variant="h6" gutterBottom>
