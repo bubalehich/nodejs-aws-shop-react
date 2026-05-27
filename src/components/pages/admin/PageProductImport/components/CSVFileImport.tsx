@@ -25,19 +25,35 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   const uploadFile = async () => {
     if (!file) return;
 
-    console.log("Requesting signed URL for", file.name);
-    const response = await axios.get<string>(url, {
-      params: { name: encodeURIComponent(file.name) },
-    });
+    const authorizationToken = localStorage.getItem("authorization_token");
 
-    console.log("Uploading to", response.data);
-    const result = await fetch(response.data, {
-      method: "PUT",
-      body: file,
-    });
-    console.log("Upload result:", result.status);
+    try {
+      console.log("Requesting signed URL for", file.name);
+      const response = await axios.get<string>(url, {
+        params: { name: encodeURIComponent(file.name) },
+        headers: authorizationToken
+          ? { Authorization: `Basic ${authorizationToken}` }
+          : undefined,
+      });
 
-    setFile(undefined);
+      console.log("Uploading to", response.data);
+      const result = await fetch(response.data, {
+        method: "PUT",
+        body: file,
+      });
+      console.log("Upload result:", result.status);
+
+      setFile(undefined);
+    } catch (error) {
+      const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+      if (status === 401) {
+        alert("401 Unauthorized — no authorization token provided.");
+      } else if (status === 403) {
+        alert("403 Forbidden — invalid authorization token.");
+      } else {
+        alert(`Upload failed: ${status ?? "unknown error"}`);
+      }
+    }
   };
 
   return (
