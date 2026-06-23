@@ -1,9 +1,14 @@
+const BFF = "http://bubalehich-bff-api-bffp.us-east-1.elasticbeanstalk.com";
+
 const API_PATHS = {
-  product: "https://mv9r6b0fml.execute-api.us-east-1.amazonaws.com/prod",
-  order: "https://.execute-api.eu-west-1.amazonaws.com/dev",
-  import: "https://etw2b0mtja.execute-api.us-east-1.amazonaws.com/prod",
-  bff: "https://.execute-api.eu-west-1.amazonaws.com/dev",
-  cart: "https://.execute-api.eu-west-1.amazonaws.com/dev",
+  // Routed through BFF (Task 10): Product Service and Cart Service only.
+  product: `${BFF}/product`,
+  cart: `${BFF}/cart`,
+  order: `${BFF}/cart/profile/cart`,
+  bff: BFF,
+  // Import Service is reached directly: BFF intentionally does not proxy it
+  // (the task says BFF should only proxy Product Service and Cart Service).
+  import: "https://s6ftvfd0jc.execute-api.us-east-1.amazonaws.com/prod",
 };
 
 export default API_PATHS;
